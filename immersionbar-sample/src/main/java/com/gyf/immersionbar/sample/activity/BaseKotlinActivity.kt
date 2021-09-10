@@ -1,10 +1,11 @@
 package com.gyf.immersionbar.sample.activity
 
 import android.os.Bundle
-import android.support.annotation.LayoutRes
-import android.support.v7.app.AppCompatActivity
+import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
 import com.gyf.immersionbar.ktx.immersionBar
 import com.gyf.immersionbar.sample.AppManager
+import com.gyf.immersionbar.sample.databinding.ActivityParamsBinding
 
 /**
  * @author geyifeng
@@ -12,10 +13,14 @@ import com.gyf.immersionbar.sample.AppManager
  */
 open class BaseKotlinActivity(@LayoutRes val layoutResID: Int) : AppCompatActivity() {
 
+    lateinit var binding: ActivityParamsBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppManager.getInstance().addActivity(this)
-        setContentView(layoutResID)
+//        setContentView(layoutResID)
+        binding = ActivityParamsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         initImmersionBar()
         //初始化数据
         initData()
